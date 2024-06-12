@@ -213,22 +213,11 @@ colormap gray;
 colorbar;
 axis off;
 
-%load('Solutions_Task_2.mat')
-
-%%%% Visualize Results %%%%
-% figure(12),imagesc(img_sobel_x); colorbar; colormap hsv; axis off;
-% figure(13),imagesc(log(1+img_edge_strength_x)); colorbar; axis off;
-% figure(14),imagesc(img_neg_edge_x); colorbar; colormap gray; axis off;
-% figure(15),imagesc(img_pos_edge_x); colorbar; colormap gray; axis off;
-% figure(16),imagesc(img_neg_edge_y); colorbar; colormap gray; axis off;
-% figure(17),imagesc(img_pos_edge_y); colorbar; colormap gray; axis off;
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Task 3: Segmentation of Door Gap Contour                                %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Extract Vertical Edge candidates for %
-% negPosGradXcombined = (img_pos_edge_x & img_neg_edge_x);
 negPosGradXcombined = (morphedPosGradX & morphedNegGradX);
 negPosGradXcombined = medfilt2(negPosGradXcombined);
 
@@ -264,21 +253,12 @@ colormap gray;
 colorbar;
 axis off;
 
-% load('Solutions_Task_3.mat')
-
-%%%% Visualize Results %%%%
-% figure(8),imagesc(max(max(img_sym_x))-abs(img_sym_x));colorbar; colormap gray;axis off;
-% figure(9),imagesc(1-candidates_x);colorbar; colormap gray;axis off;
-% figure(10),imagesc(1-candidates_y);colorbar; colormap gray;axis off;
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Task 4: Measuring Lines of the Door Gap                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Compute Hough space for vertical lines
 [H1, T1, R1] = hough(xFinal);
-
-% hPeaksX3lines = houghpeaks(H1, 3); Matlab is bugged! We can't update the value (2 or 3) as it forever gives the output of the first run of the function. 
 
 hPeaksX = houghpeaks(H1, 2);
 
